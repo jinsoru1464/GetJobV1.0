@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GET JOB - 자료 관리 페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #fff;
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        input[type="text"], textarea {
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            width: 100%;
+            resize: vertical;
+        }
+        textarea {
+            height: 100px;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .image-upload-label {
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 5px;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
+        }
+        .section {
+            background-color: #e6edfc;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        .section h2 {
+            margin: 0 0 10px;
+            font-size: 22px;
+        }
+        .btn {
+            background-color: #4a73f3;
+            color: white;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #355bb2;
+        }
+        .flex-row {
+            display: flex;
+            gap: 20px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .tag-button {
+            padding: 8px 16px;
+            background-color: #d0d7ff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .tag-button.active {
+            background-color: #4a73f3;
+            color: white;
+        }
+        .tag-button:hover {
+            background-color: #355bb2;
+            color: white;
+        }
+    </style>
+    <script>
+        function toggleActive(button) {
+            const buttons = document.querySelectorAll('.tag-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        }
+
+        function saveData() {
+            const project = {
+                title: document.getElementById('title').value,
+                subject: document.getElementById('subject').value,
+                members: document.getElementById('members').value,
+                period: document.getElementById('period').value,
+                skills: document.getElementById('skills').value,
+                role: document.querySelector('.tag-button.active').innerText,
+                description: document.querySelector('#description').value
+            };
+
+            fetch('/api/projects', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(project)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('저장 완료!');
+                console.log('성공:', data);
+            })
+            .catch((error) => {
+                console.error('오류 발생:', error);
+            });
+        }
+    </script>
+</head>
+<body>
+<header>
+    <h1>GET JOB - 자료 관리 페이지</h1>
+</header>
+<div class="container">
+    <div class="form-group">
+        <label for="title">제목:</label>
+        <input type="text" id="title" placeholder="제목을 입력하세요">
+    </div>
+    <div class="flex-row">
+        <div style="flex: 1;">
+            <label>주제</label>
+            <input type="text" id="subject" placeholder="주제를 입력해주세요">
+            <label>인원</label>
+            <input type="text" id="members" placeholder="인원을 입력해주세요">
+        </div>
+        <div style="flex: 1;">
+            <label>기간</label>
+            <input type="text" id="period" placeholder="기간을 입력해주세요">
+            <label>스킬</label>
+            <input type="text" id="skills" placeholder="스킬을 입력해주세요">
+            <label for="image-upload" class="image-upload-label">이미지 업로드</label>
+            <input type="file" id="image-upload" accept="image/*">
+        </div>
+    </div>
+    <div class="button-group">
+        <button class="tag-button active" onclick="toggleActive(this)">개발자</button>
+        <button class="tag-button" onclick="toggleActive(this)">PM·기획</button>
+        <button class="tag-button" onclick="toggleActive(this)">디자이너</button>
+    </div>
+    <div class="section">
+        <h2>프로젝트 개요</h2>
+        <textarea id="description" placeholder="프로젝트 개요를 작성하세요."></textarea>
+    </div>
+    <button class="btn" onclick="saveData()">저장하기</button>
+</div>
+</body>
+</html>
