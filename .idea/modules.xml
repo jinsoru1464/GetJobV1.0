@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/GetJobV1.0.0.iml" filepath="$PROJECT_DIR$/.idea/GetJobV1.0.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/GetJobV1.0.iml" filepath="$PROJECT_DIR$/.idea/GetJobV1.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GetJobV1.0.0/GetJobV1.0.0.iml" filepath="$PROJECT_DIR$/GetJobV1.0.0/GetJobV1.0.0.iml" />
     </modules>
   </component>
 </project>
