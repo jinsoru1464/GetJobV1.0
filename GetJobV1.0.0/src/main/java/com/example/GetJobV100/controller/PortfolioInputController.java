@@ -14,13 +14,14 @@ public class PortfolioInputController {
     @Autowired
     private PortfolioInputService portfolioInputService;
 
+    @PostMapping
+    public PortfolioInput saveProject(@RequestBody PortfolioInput portfolioInput) {
+        System.out.println("Received PortfolioInput: " + portfolioInput.toString());
+        return portfolioInputService.saveProject(portfolioInput);
+    }
+
     @GetMapping
     public List<PortfolioInput> getAllProjects() {
         return portfolioInputService.getAllProjects();
-    }
-
-    @PostMapping
-    public PortfolioInput saveProject(@RequestBody PortfolioInput portfolioInput) {
-        return portfolioInputService.saveProject(portfolioInput);
     }
 }

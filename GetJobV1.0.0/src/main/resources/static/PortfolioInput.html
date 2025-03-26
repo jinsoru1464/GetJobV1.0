@@ -32,7 +32,7 @@
             font-weight: bold;
             margin-right: 10px;
         }
-        input[type="text"], textarea {
+        input[type="text"], input[type="date"], textarea {
             padding: 8px;
             margin: 5px 0;
             border-radius: 4px;
@@ -110,33 +110,46 @@
             button.classList.add('active');
         }
 
-        function saveData() {
-            const project = {
-                title: document.getElementById('title').value,
-                subject: document.getElementById('subject').value,
-                members: document.getElementById('members').value,
-                period: document.getElementById('period').value,
-                skills: document.getElementById('skills').value,
-                role: document.querySelector('.tag-button.active').innerText,
-                description: document.querySelector('#description').value
-            };
+function saveData() {
+    const project = {
+        title: document.getElementById("title").value,
+        subject: document.getElementById("subject").value,
+        members: document.getElementById("members").value,
+        startDate: document.getElementById("start-date").value,
+        endDate: document.getElementById("end-date").value,
+        skills: document.getElementById("skills").value,
+        role: document.querySelector('.tag-button.active').innerText,
+        projectDescription: document.getElementById("projectDescription").value,
+        roleDescription: document.getElementById("roleDescription").value,
+        issueDescription: document.getElementById("issueDescription").value,
+        techDescription: document.getElementById("techDescription").value,
+        feedbackDescription: document.getElementById("feedbackDescription").value,
+        linkDescription: document.getElementById("linkDescription").value
+    };
 
-            fetch('/api/projects', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(project)
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert('저장 완료!');
-                console.log('성공:', data);
-            })
-            .catch((error) => {
-                console.error('오류 발생:', error);
-            });
-        }
+    console.log("전송할 데이터:", JSON.stringify(project));
+
+    fetch('/api/projects', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(project)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('저장 완료!');
+        console.log('성공:', data);
+    })
+    .catch((error) => {
+        console.error('오류 발생:', error);
+    });
+}
+
+
+
+
+
     </script>
 </head>
 <body>
@@ -154,10 +167,12 @@
             <input type="text" id="subject" placeholder="주제를 입력해주세요">
             <label>인원</label>
             <input type="text" id="members" placeholder="인원을 입력해주세요">
+            <label>시작 날짜</label>
+            <input type="date" id="start-date">
+            <label>종료 날짜</label>
+            <input type="date" id="end-date">
         </div>
         <div style="flex: 1;">
-            <label>기간</label>
-            <input type="text" id="period" placeholder="기간을 입력해주세요">
             <label>스킬</label>
             <input type="text" id="skills" placeholder="스킬을 입력해주세요">
             <label for="image-upload" class="image-upload-label">이미지 업로드</label>
@@ -171,7 +186,27 @@
     </div>
     <div class="section">
         <h2>프로젝트 개요</h2>
-        <textarea id="description" placeholder="프로젝트 개요를 작성하세요."></textarea>
+        <textarea id="projectDescription" placeholder="프로젝트가 기획된 배경과 해결하고자 했던 구체적인 문제를 설명합니다. 어떤 목표를 달성하고자 했는지 간단명료하게 적어주세요."></textarea>
+    </div>
+    <div class="section">
+        <h2>주요 역할과 기여 사항</h2>
+        <textarea id="roleDescription" placeholder="프로젝트 내에서 본인이 담당한 역할 (책임 범위)을 상세히 기록합니다. 기술적인 기여 (해결한 문제나 구현한 기능, 성능 개선, 코드 최적화 등) 를 중심으로 적어주세요."></textarea>
+    </div>
+    <div class="section">
+        <h2>문제와 해결과정</h2>
+        <textarea id="issueDescription" placeholder="프로젝트 진행 중 발생한 어려움이나 이슈를 설명, 분석하고 이에 대해 어떻게 해결했는지 설명합니다."></textarea>
+    </div>
+    <div class="section">
+        <h2>사용 기술 및 도구</h2>
+        <textarea id="techDescription" placeholder="프로젝트에서 사용한 기술적 요소 (프로그래밍 언어, 프레임워크, 라이브러리, 데이터베이스 등)와 선택한 이유를 적어주세요. 작업에 사용한 도구 (개발 환경, 협업 도구(Git, Jira 등), CI/CD 도구 등) 와 선택한 이유를 적어주세요."></textarea>
+    </div>
+    <div class="section">
+        <h2>피드백</h2>
+        <textarea id="feedbackDescription" placeholder="프로젝트를 통해 배운 점이나 향후 개선할 점, 기술적 혹은 협업 측면에서 성장한 부분을 기록해 주세요."></textarea>
+    </div>
+    <div class="section">
+        <h2>관련 자료 또는 링크</h2>
+        <textarea id="linkDescription" placeholder="포트폴리오의 완성도를 높이기 위해 관련된 자료 또는 링크 (GitHub 등)를 추가해 주세요."></textarea>
     </div>
     <button class="btn" onclick="saveData()">저장하기</button>
 </div>
