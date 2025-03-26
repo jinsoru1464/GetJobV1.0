@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GET JOB - 메인 페이지</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #7B9DF4, #B1C8FA);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        nav a {
+            margin-left: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            color: white;
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .hero button {
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            background-color: #4C77E8;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .hero button:hover {
+            background-color: #3A61C9;
+        }
+
+        .feature-cards {
+            display: flex;
+            justify-content: center;
+            padding: 50px;
+            gap: 20px;
+        }
+
+        .card {
+            flex: 1;
+            padding: 30px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .card p {
+            font-size: 18px;
+            color: #666;
+        }
+    </style>
+    <script>
+        function goToPortfolioInputPage() {
+            window.location.href = 'PortfolioInput.html';
+        }
+
+        function goToMainPage() {
+            window.location.href = 'mainpage.html';
+        }
+    </script>
+</head>
+<body>
+<header>
+    <h1 onclick="goToMainPage()">GET JOB</h1>
+    <nav>
+        <a href="#">포트폴리오</a>
+        <a href="#">AI 서비스</a>
+        <a href="#">로그아웃</a>
+    </nav>
+</header>
+<section class="hero">
+    <h2>손쉽게 관리하는 나만의 포트폴리오</h2>
+    <p>쉽고 체계적인 포트폴리오 작성, 편리한 관리 기능, AI 기반 자소서/면접 준비까지!</p>
+    <button onclick="goToPortfolioInputPage()">포트폴리오 만들기 →</button>
+</section>
+<section class="feature-cards">
+    <div class="card" onclick="goToPortfolioInputPage()">
+        <h3>포트폴리오 만들기</h3>
+        <p>새로운 포트폴리오를 만들어 전문성을 효과적으로 표현하세요</p>
+    </div>
+    <div class="card">
+        <h3>자기소개서 작성하기</h3>
+        <p>AI 가이드와 함께 인상적인 자기소개서를 작성해보세요</p>
+    </div>
+    <div class="card">
+        <h3>면접 준비하기</h3>
+        <p>예상 질문을 통해 면접을 철저히 준비해보세요</p>
+    </div>
+</section>
+</body>
+</html>

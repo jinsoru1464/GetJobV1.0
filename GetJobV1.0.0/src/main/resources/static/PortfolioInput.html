@@ -12,9 +12,13 @@
             padding: 0;
         }
         header {
-            background-color: #fff;
-            padding: 20px;
-            border-bottom: 1px solid #e0e0e0;
+            header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            color: black;
+        }
         }
         header h1 {
             margin: 0;
@@ -110,6 +114,10 @@
             button.classList.add('active');
         }
 
+        function goToMainPage() {
+            window.location.href = 'mainpage.html';
+        }
+
 function saveData() {
     const project = {
         title: document.getElementById("title").value,
@@ -140,6 +148,7 @@ function saveData() {
     .then(data => {
         alert('저장 완료!');
         console.log('성공:', data);
+        goToMainPage();
     })
     .catch((error) => {
         console.error('오류 발생:', error);
@@ -154,7 +163,14 @@ function saveData() {
 </head>
 <body>
 <header>
-    <h1>GET JOB - 자료 관리 페이지</h1>
+    <header>
+        <h1 onclick="goToMainPage()">GET JOB</h1>
+        <nav>
+            <a href="#">포트폴리오</a>
+            <a href="#">AI 서비스</a>
+            <a href="#">로그아웃</a>
+        </nav>
+    </header>
 </header>
 <div class="container">
     <div class="form-group">
@@ -208,7 +224,7 @@ function saveData() {
         <h2>관련 자료 또는 링크</h2>
         <textarea id="linkDescription" placeholder="포트폴리오의 완성도를 높이기 위해 관련된 자료 또는 링크 (GitHub 등)를 추가해 주세요."></textarea>
     </div>
-    <button class="btn" onclick="saveData()">저장하기</button>
+    <button class="btn" onclick="saveData()" >저장하기</button>
 </div>
 </body>
 </html>
